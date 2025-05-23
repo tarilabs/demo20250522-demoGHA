@@ -23,9 +23,10 @@ jobs:
             });
             const isFirstTimeContributor = pr.user.contributions === 0;
             console.log(`First-time contributor status: ${isFirstTimeContributor}`);
-            if (!isFirstTimeContributor) {
-              core.warning('Maintainers: ensure label `ok-to-test` has been maintained; ensure all tests have actually executed before merging.')
-            }
+            core.info('info.');
+            
+              core.warning('Maintainers: ensure label `ok-to-test` has been maintained; ensure all tests have actually executed before merging.');
+            
             core.setOutput('isFirstTimeContributor', isFirstTimeContributor.toString());
 
       # - name: Log contributor status (isFirstTimeContributor true)
