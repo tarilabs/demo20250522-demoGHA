@@ -1,10 +1,8 @@
 name: Welcome first-time contributors (Beta)
 on:
-  pull_request_target:
+  pull_request:
     types:
       - opened
-permissions:
-  issues: write
 
 # do NOT: add actions/checkout to this flow, add-third party scripts, or auto-trigger CI jobs
 # goal: this is meant to remind maintainers/approvers to add labels to ensure all tests are executed before merging
@@ -25,6 +23,9 @@ jobs:
             });
             const isFirstTimeContributor = pr.user.contributions === 0;
             console.log(`First-time contributor status: ${isFirstTimeContributor}`);
+            if (isFirstTimeContributor) {
+              core.warning('Maintainers: ensure label `ok-to-test` has been maintained; ensure all tests have actually executed before merging.')
+            }
             core.setOutput('isFirstTimeContributor', isFirstTimeContributor.toString());
 
       - name: Log contributor status (isFirstTimeContributor true)
